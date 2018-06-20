@@ -34,7 +34,7 @@
 </style></head>
 
 <body>
-	<div id="filename_temp" style="display:none;" title="This is temp div for saving here a file name if file was been loaded by input."></div>
+	<div id="filename_temp" style="display:none;" title="This is temp div for saving here a file name if file was been loaded by input.">filename.txt</div>
     <!--status notification-->
     <div class="hidden">
         <div class="alert alert-success fade in" id="vrSuccess">
@@ -291,7 +291,7 @@
                                         </div>
                                         <div id="vrAlert"></div>
                                         <div class="panel-body">
-                                            <textarea class="form-control message" rows="7" id="pure-text" placeholder="Here you'll see the raw message, if signed it will be verified." readonly=""></textarea>
+                                            <textarea class="form-control message" rows="7" id="pure-text" placeholder="Here you'll see the raw message, if this signed and will be verified." readonly=""></textarea>
                                             <br>
                                             <a id="download_verified_as_binary" style="display:none; float: right" href="javascript:void(0);"
 											title="If in textarea base64 encoded file content - you can download this as binary RAW-data.">
@@ -384,7 +384,10 @@
                                             <h3 class="panel-title">Receiver's Private Key (decryption)</h3>
                                         </div>
                                         <div class="panel-body">
-                                            <textarea class="form-control message" id="decryption-private-key" rows="7" placeholder="Paste the private key here to decrypt. RSA key only."></textarea>
+                                            <textarea class="form-control message" id="decryption-private-key" rows="7" placeholder="Paste the private key here to decrypt. RSA key only."
+title="If you want to check signature only, without decrypt.
+Paste here some another private key and signer's pub in next field.
+Or paste here priv, which correspoding the signer's pub, without filling next field."></textarea>
                                             <input type='file' onchange='openFile(event, "decryption-private-key")'><br>
                                             <br>
 
@@ -399,7 +402,7 @@
                                           <h3 class="panel-title">Signer's Public Key</h3>
                                       </div>
                                       <div class="panel-body">
-                                          <textarea class="form-control message" id="signer_public_key" rows="7" placeholder="Paste the signer's public key here if the message is signed. This can be ECC key." title="Or leave this field empty, if message is without signature."></textarea>
+                                          <textarea class="form-control message" id="signer_public_key" rows="7" placeholder="Paste the signer's public key here, if the message is signed. This can be ECC key." title="Or leave this field empty, if message is without signature."></textarea>
                                           <input type='file' onchange='openFile(event, "signer_public_key")'><br>
                                           <br>
                                       </div>
