@@ -163,6 +163,7 @@
                                                 </div>
 
                                                 <input value="Generate keys" id="generate_keys_btn" class="btn btn-primary btn-lg btn-block send" name="send" type="submit">
+                                                <a href="https://thechiefmeat.github.io/pgp" id="start_again_btn" class="btn btn-link btn-block hide">Click here to regenerate another pair of key</a>
                                             </form>
                                         </div>
                                     </div>
@@ -210,7 +211,7 @@
                                             <h3 class="panel-title">Your Private Key</h3>
                                         </div>
                                         <div class="panel-body">
-                                            <textarea class="form-control message" id="sign-private-key" rows="7" placeholder="Paste your private key here (ECC or RSA keys)." title=""></textarea>
+                                            <textarea class="form-control message" id="sign-private-key" rows="7" placeholder="Paste your private key here (ECC or RSA keys)." title="ECC and RSA algorithms working both for sign and verify. You can use ECC keys here."></textarea>
                                             <input type='file' onchange='openFile(event, "sign-private-key")'>
                                             <br>
                                             <div class="input-group">
@@ -262,7 +263,7 @@
                                         <div class="panel-heading">
                                             <h3 class="panel-title">Signer's Public Key</h3>
                                         </div>
-                                        <div class="panel-body" title="">
+                                        <div class="panel-body" title="Sign by private key, verify by public key. ECC keys working too.">
                                             <textarea class="form-control message" id="Signer-public-key" rows="7" placeholder="Paste receiver&#39;s public key here."></textarea>
                                         <input type='file' onchange='openFile(event, "Signer-public-key")'><br>
                                         </div>
@@ -280,7 +281,7 @@
                                         </div>
                                     </div>
 
-                                     <button class="btn btn-primary" id="verify-signature" title="">Verify signature</button>
+                                     <button class="btn btn-primary" id="verify-signature" title="Message -> to hash, then verify fingerprint from signed hash.">Verify signature</button>
                                      <br>
                                      <br>
 
@@ -290,7 +291,7 @@
                                         </div>
                                         <div id="vrAlert"></div>
                                         <div class="panel-body">
-                                            <textarea class="form-control message" rows="7" id="pure-text" placeholder="Here you'll see the raw message, if this is signed it will be verified." readonly=""></textarea>
+                                            <textarea class="form-control message" rows="7" id="pure-text" placeholder="Here you'll see the raw message, if this signed and will be verified." readonly=""></textarea>
                                             <br>
                                             <a id="download_verified_as_binary" style="display:none; float: right" href="javascript:void(0);"
 											title="If in textarea base64 encoded file content - you can download this as binary RAW-data.">
@@ -316,7 +317,7 @@
                                           <h3 class="panel-title">Reсeiver's Public Key</h3>
                                       </div>
                                       <div class="panel-body">
-                                          <textarea class="form-control message" id="signencrypt-receivers-public-key" rows="7" placeholder="Paste the public key here. RSA only." title=""></textarea>
+                                          <textarea class="form-control message" id="signencrypt-receivers-public-key" rows="7" placeholder="Paste the public key here. RSA only." title="Need for encryption. Only RSA. ECC encryption not working now..."></textarea>
                                           <input type='file' onchange='openFile(event, "signencrypt-receivers-public-key")'><br>
                                           <br>
                                       </div>
@@ -326,7 +327,7 @@
                                             <h3 class="panel-title">Signer's Private Key (signing)</h3>
                                         </div>
                                         <div class="panel-body">
-                                            <textarea class="form-control message" id="signencrypt-private-key" rows="7" placeholder="Paste the private key here. This can be ECC key." title=""></textarea>
+                                            <textarea class="form-control message" id="signencrypt-private-key" rows="7" placeholder="Paste the private key here. This can be ECC key." title="If private key not specified will be encryption without signature."></textarea>
                                             <input type='file' onchange='openFile(event, "signencrypt-private-key")'><br>
                                             <br>
 
@@ -384,7 +385,9 @@
                                         </div>
                                         <div class="panel-body">
                                             <textarea class="form-control message" id="decryption-private-key" rows="7" placeholder="Paste the private key here to decrypt. RSA key only."
-title=""></textarea>
+title="If you want to check signature only, without decrypt.
+Paste here some another private key and signer's pub in next field.
+Or paste here priv, which correspoding the signer's pub, without filling next field."></textarea>
                                             <input type='file' onchange='openFile(event, "decryption-private-key")'><br>
                                             <br>
 
@@ -399,7 +402,7 @@ title=""></textarea>
                                           <h3 class="panel-title">Signer's Public Key</h3>
                                       </div>
                                       <div class="panel-body">
-                                          <textarea class="form-control message" id="signer_public_key" rows="7" placeholder="Paste the signer's public key here, if the message is signed. This can be ECC key." title=""></textarea>
+                                          <textarea class="form-control message" id="signer_public_key" rows="7" placeholder="Paste the signer's public key here, if the message is signed. This can be ECC key." title="Or leave this field empty, if message is without signature."></textarea>
                                           <input type='file' onchange='openFile(event, "signer_public_key")'><br>
                                           <br>
                                       </div>
@@ -413,7 +416,9 @@ title=""></textarea>
                                         </div>
                                         <div class="panel-body">
                                             <textarea class="form-control message" rows="7" id="decryption-encrypted-text" placeholder="Enter the encrypted message here."
-title=""></textarea>
+title="Here can be signed but not encrypted message,
+if private key, corresponing with PUBLIC - specified.
+But will be better to use 'virify'-tab to check signature."></textarea>
 <input type='file' onchange='openFile(event, "decryption-encrypted-text")'><br>
                                         </div>
                                     </div>
@@ -479,7 +484,7 @@ this will not be verified successfully.">Decrypt the message (and verify signatu
                                     <div class="panel-heading" role="tab" id="headingOne">
                                         <h4 class="panel-title">
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Is it safe for me to generate my PGP keys through your program?
+          Is it safe for me to generate my PGP keys through your website?
         </a>
       </h4>
                                     </div>
@@ -487,7 +492,10 @@ this will not be verified successfully.">Decrypt the message (and verify signatu
                                         <div class="panel-body">
                                             Yes, it is as safe as
 generating your keys using a local application. The key generation on
-this program is done client-side only. This means the key pairs are generated entirely on your computer and they never leave your computer
+this website is done client-side only. This means the key pairs are
+generated entirely in your web browser and they never leave your
+computer. This website never sees any key related data or the key
+itself.
                                         </div>
                                     </div>
                                 </div>
@@ -541,7 +549,7 @@ about it at <a href="http://tools.ietf.org/html/rfc6637">RFC 6637</a>.
                                     <div class="panel-heading" role="tab" id="headingFive">
                                         <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-          Why does my computer slow down when I'm generating keys?
+          Why does my web browser or computer slow down when I'm generating keys?
         </a>
       </h4>
                                     </div>
@@ -580,12 +588,11 @@ your device.
 
                         <!-- About -->
                         <div role="tabpanel" class="tab-pane" id="about">
-
-						            <blockquote>PGP Suite is a data encryption and decryption computer program that provides cryptographic privacy and authentication for data communication. PGP Suite supports both message and file signing and encryption.
+						    <blockquote>PGP Suite is a data encryption and decryption computer program that provides cryptographic privacy and authentication for data communication. PGP Suite supports both message and file signing and encryption.
 						   
-						            <br></br>
-						
-						                           Pretty Good Privacy (PGP) is a data encryption and decryption computer program
+						   <br></br>
+						   
+                           Pretty Good Privacy (PGP) is a data encryption and decryption computer program
                                        that provides cryptographic privacy and authentication for data communication.
                                        PGP is often used for signing, encrypting, and decrypting texts, e-mails, files,
                                        directories, and whole disk partitions and to increase the security of e-mail
@@ -596,7 +603,10 @@ your device.
                            </blockquote>
 
                             <p>
-							   None of
+                                This site only provides a simple and easy to use tool for people to generate PGP keys
+                               with. Today, the common methods for generating keys still involve going to a command
+                               prompt of a Linux/Unix machine and using the GPG utility, or installing a PGP compatible
+                               application on your desktop. I wanted to provide an easier way to generate keys. None of
                                this would be possible without the awesome Open Source software I'm utilizing. I'm
                                using <a href="https://keybase.io/">KeyBase's</a> awesome JavaScript implementation of
                                PGP (<a href="https://github.com/keybase/kbpgp">kbpgp</a>). For file saving capabilities
@@ -627,7 +637,8 @@ your device.
                             You can find an offline version <a href="https://github.com/TheChiefMeat/pgp/releases/latest">here, maintained by TheChiefMeat.</a></p>
                             <p>
                                 If you have any inquiry or problem, you may create an issue
-                                <a href="https://github.com/TheChiefMeat/pgp/issues">here.</a>
+                                <a href="https://github.com/heiswayi/pgp/issues">here (heiswayi)</a> or
+                                <a href="https://github.com/ramuta/pgp/issues">here (ramuta)</a>.
                             </p>
                         </div>
                         <!-- end About -->
