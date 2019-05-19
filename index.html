@@ -103,11 +103,9 @@
                                                     </div>
                                                     <span id="helpBlock" class="help-block"><a href="#" data-toggle="popover" title="" 
                                                         data-content="
-                                                        [TODO] Your email address will be included as public information in your public PGP key, 
-                                                        so your public key can be easily imported by third-party PGP software. 
-                                                        If you do not supply your email address, your PGP decryption software may be unable to link your email address to your public PGP key, 
-                                                        and therefore unable to automatically encrypt/decrypt email messages. 
-                                                        As a result, you will have to manually decrypt messages each time you receive a PGP-encrypted message." data-original-title="Email address">Email adresi: Neden gerekli?</a></span>
+                                                        E-Posta adresiniz açık anahtarınız içinde bilgi olarak paylaşılacaktır. 
+                                                        Böylece açık anahtarınız diğer uygulamalar tarafından kullanılabilir. 
+                                                        Eğer e-postanızı belirtmezseniz e-posta uygulamaları otomatik olarak şifreleme/de-şifreleme yapamaz." data-original-title="Email address">E-posta adresi: Neden gerekli?</a></span>
                                                 </div>
 
                                                 <div class="form-group">
@@ -192,9 +190,9 @@
                                             <textarea class="form-control message" rows="7" name="pubkey" placeholder="Açık anahtarınız burada üretilecek." id="pubkey" readonly="readonly"></textarea>
                                             <span id="helpBlock" class="help-block"><a href="#download_pub_key" class="btn btn-danger download disabled" title="
                                                 Bu düğme anahtar çiftiniz üretildikten sonra aktif olacak." name="download_pub_key" id="download_pub_key"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Açık anahtarı indir (.ASC dosyası)</a> <a href="#" class="btn btn-link" data-toggle="popover" title="" data-content="
-                                                [TODO] You can put this key on your website or at the bottom signature of your email messages. 
-                                                Anyone wishing to contact you in private will have your public PGP key to send you encrypted messages. 
-                                                This file contain the key in text format and can be opened as text." data-original-title="Public key">Daha fazla bilgi edinin</a>
+                                                Bu anahtarı sitenizde yayınlayabilir, e-postalarınızın altına koyabilirsiniz. 
+                                                Size şifreli mesaj ile ulaşmak isteyen bir kişi açık PGP anahtarınızı kullanabilir. 
+                                                Bu dosya metin formatındadır ve metin editörleri ile açılabilir." data-original-title="Public key">Daha fazla bilgi edinin</a>
                                             </span>
                                         </div>
                                     </div>
@@ -207,9 +205,9 @@
                                             <textarea class="form-control message" rows="7" name="privkey" placeholder="Gizli anahtarınız burada üretilecektir." id="privkey" readonly="readonly"></textarea>
                                             <span id="helpBlock" class="help-block"><a href="#download_priv_key" class="btn btn-danger download disabled" title="
                                                 Bu düğme anahtar çiftiniz üretildikten sonra aktif olacak." name="download_priv_key" id="download_priv_key"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Gizli anahtarı indir (.ASC file)</a> <a href="#" class="btn btn-link" data-toggle="popover" title="" data-content="
-                                                [TODO] Save your private PGP key in a file on your computer and keep it as confidential as possible. 
-                                                You will need it to decrypt PGP messages sent to you using your public PGP key. 
-                                                This file contain the key in text format and can be opened as text." data-original-title="Private key">Daha fazla bilgi edinin</a>
+                                                Gizli anahtarınızı bilgisyarınıza kaydedin ve mümkün olduğunda saklı tutun. 
+                                                Açık anahtarınız ile şifrelenmiş mesajları de-şifrelemek için bu anahtara ihtiyaç duyacaksınız.
+                                                Bu dosya metin formatındadır ve metin editörleri ile açılabilir." data-original-title="Private key">Daha fazla bilgi edinin</a>
                                             </span>
                                         </div>
                                     </div>
@@ -365,7 +363,7 @@
                                  <div class="col-md-7">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h3 class="panel-title">Meaajınız</h3>
+                                            <h3 class="panel-title">Mesajınız</h3>
                                         </div>
                                         <div class="panel-body">
                                             <textarea class="form-control message" rows="7" id="signencrypt-plain-text" placeholder="Mesajı buraya yazınız."></textarea>
@@ -422,7 +420,7 @@ Veya bir sonraki alanı boş bırakıp buraya gönderenin özel anahtarını gir
                                     </div>
                                     <div class="panel panel-default">
                                       <div class="panel-heading">
-                                          <h3 class="panel-title">İmzalayanın özel anahtarı</h3>
+                                          <h3 class="panel-title">İmzalayanın açık anahtarı</h3>
                                       </div>
                                       <div class="panel-body">
                                           <textarea class="form-control message" id="signer_public_key" rows="7" 

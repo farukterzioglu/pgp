@@ -58,7 +58,7 @@ var genKeyPair = function () {
 	_debug("Update buttons");
 	$('#generate_keys_btn').css('pointer-events', 'none');
 	$('#generate_keys_btn').addClass("disabled");
-	$('#generate_keys_btn').val("Generating .");
+	$('#generate_keys_btn').val("Üretiliyor .");
 
 	// Create a progress hook
 	var my_asp = new kbpgp.ASP({
@@ -75,14 +75,14 @@ var genKeyPair = function () {
 			// Else we continue to update button text
 			var btn = $('#generate_keys_btn');
 
-			if (btn.val() == 'Generating .') {
-				btn.val('Generating ..');
+			if (btn.val() == 'Üretiliyor .') {
+				btn.val('Üretiliyor ..');
 			}
-			else if (btn.val() == 'Generating ..') {
-				btn.val('Generating ...');
+			else if (btn.val() == 'Üretiliyor ..') {
+				btn.val('Üretiliyor ...');
 			}
 			else {
-				btn.val('Generating .');
+				btn.val('Üretiliyor .');
 			}
 
 			// And we update the timestamp
@@ -145,7 +145,7 @@ var genKeyPair = function () {
 	  	// Enable button once again (NOTE: user should refresh to re-gen)
 	  	$('#generate_keys_btn').removeClass("disabled");
 	  	$('#generate_keys_btn').removeClass("btn-primary").addClass("btn-success");
-	  	$('#generate_keys_btn').val("Finished");
+	  	$('#generate_keys_btn').val("Bitti");
 	  	$('#start_again_btn').removeClass("hide").fadeIn();
 	});
 
@@ -187,19 +187,19 @@ var populateKeysizeDropdown = function() {
 
 	/* Accepted RSA key sizes */
 	rsa_bitlengths = [
-		{"value": "", "class":"disabled", "text":"Key Size", "selected":"selected"},
-		{"value": "1024", "class":null, "text":"1024 bits (good for testing purposes)", "selected":null},
-		{"value": "2048", "class":null, "text":"2048 bits (secure)", "selected":null},
-		{"value": "4096", "class":null, "text":"4096 bits (more secure (Recommended))", "selected":null},
-		{"value": "8192", "class":null, "text":"8192 bits (super secure, super slow)", "selected":null},
+		{"value": "", "class":"disabled", "text":"Anahtar Boyutu", "selected":"selected"},
+		{"value": "1024", "class":null, "text":"1024 bits (test için iyi)", "selected":null},
+		{"value": "2048", "class":null, "text":"2048 bits (güvenli)", "selected":null},
+		{"value": "4096", "class":null, "text":"4096 bits (daha güvenli (tavsiye edilen))", "selected":null},
+		{"value": "8192", "class":null, "text":"8192 bits (süper güvenli, süper yavaş)", "selected":null},
 	]
 
 	/* Accepted ECC key sizes */
 	ecc_bitlengths = [
-		{"value": "", "class":"disabled", "text":"Key Size", "selected":"selected"},
+		{"value": "", "class":"disabled", "text":"Anahtar Boyutu", "selected":"selected"},
 		//{"value": "163", "class":null, "text":"163 bits (good for testing purposes)", "selected":null},
 		//{"value": "256", "class":null, "text":"256 bits (secure)", "selected":null},
-		{"value": "384", "class":null, "text":"384 bits (secure)", "selected":null},
+		{"value": "384", "class":null, "text":"384 bits (güvenli)", "selected":null},
 		//{"value": "512", "class":null, "text":"512 bits (even more secure)", "selected":null},
 	]
 

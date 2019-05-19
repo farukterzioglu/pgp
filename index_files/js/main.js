@@ -159,12 +159,12 @@ function updateLink(input, link, as_binary, action) { //
 	var filename_notify = 'Filename is: '+link.getAttribute("download");
 
 	if(as_binary===undefined){
-		link.setAttribute('title', 'Download '+suffix+' message as text. \n'+
+		link.setAttribute('title', suffix+' mesajı metin olarak indir. \n'+
 		filename_notify
 		);
 	}else{
-		link.setAttribute('title', 'Download '+suffix+' message as binary. \n'+
-		'If in textarea base64 encoded file content - you can download this as binary RAW-data.\n'+
+		link.setAttribute('title', suffix+' mesajı binary olarak indir. \n'+
+		'Eğer içerik base64 kodlanmışsa, binary ham veri olarak indirebilirsiniz.\n'+
 		filename_notify
 		);
 	}
@@ -240,7 +240,7 @@ $(document).ready(function() {
                 passphrase: signPassphrase.val()
               }, function(err) {
                 if (!err) {
-                  console.log("Loaded private key with passphrase");
+                  console.log("Gizli anahtar parola ile yüklendi.");
 
                   var params = {
                     msg: signPlainText.val(),
@@ -254,7 +254,7 @@ $(document).ready(function() {
                   });
 					
 					clone = $('#vrSuccess').clone();
-					clone.find('#vrAddrLabel').html("Message successfully signed.");
+					clone.find('#vrAddrLabel').html("Mesaj başarılı şekilde imzalandı.");
 					clone.appendTo($('#vrAlert_signed'));
                 }else{
 					console.log("Error"+err);
@@ -263,8 +263,8 @@ $(document).ready(function() {
 				}
               });
             } else {
-              console.log("Loaded private key w/o passphrase");
-			  clone.find('#vrAddrLabel').html("Invalid private key or password.");
+              console.log("Gizli anahtar parolasız olarak yüklendi.");
+			  clone.find('#vrAddrLabel').html("Geçersiz gizli anahtar veya parola.");
 			  clone.appendTo($('#vrAlert_signed'));
             }
           }
@@ -288,7 +288,7 @@ $(document).ready(function() {
           armored: SignerPublicKey.val()
         }, function(err, receiver) {
           if (!err) {
-            console.log("receiver's public key is loaded");
+            console.log("Alıcının açık anahtarı yüklendi.");
 			
             // encrypt the message
             var params = {
@@ -309,7 +309,7 @@ $(document).ready(function() {
 						//this means keyfetch: ring not working correctly.
 						//Also, this means that maybe, signing is not doing by ECC private key, and doing by RSA pub, or both...
 						
-						clone.find('#vrAddrLabel').html("Message failed to verify! See console.log (F12-button)"+err);
+						clone.find('#vrAddrLabel').html("Mesaj doğrulanamadı! Konsol kayıtlarına bakın (F12)"+err);
 						clone.appendTo($('#vrAlert'));
                       return console.log("Problem: " + err);
                     } else {
@@ -324,15 +324,15 @@ $(document).ready(function() {
                       ds = literals[0].get_data_signer();
                       if (ds) { km = ds.get_key_manager(); }
                       if (km) {
-                        console.log("Signed by PGP fingerprint");
+                        console.log("PGP parmak izi ile doğrulandı.");
                         var pub_f = receiver.get_pgp_fingerprint().toString('hex');
 						var text_f = km.get_pgp_fingerprint().toString('hex');
-						console.log(text_f, (pub_f===text_f) ? 'and verified.' : 'and failed to verify.');
+						console.log(text_f, (pub_f===text_f) ? 've doğrulandı.' : 've doğrulanamadı.');
 						//console.log('fingerprint of public key from private:\n'+pub_f);
 
 						//-> switch alert message
 						clone = (pub_f === text_f) ? $('#vrSuccess').clone() : $('#vrWarning').clone();
-						clone.find('#vrAddrLabel').html("Message signature is verified with fingerprint "+pub_f);
+						clone.find('#vrAddrLabel').html("Mesaj imzası doğrulandı. Parmak izi: "+pub_f);
                       }
 						clone.appendTo($('#vrAlert')); //display alert message
                     }
@@ -340,7 +340,7 @@ $(document).ready(function() {
 
           } else {
             console.log("Error!");
-			clone.find('#vrAddrLabel').html("Message failed to verify!");
+			clone.find('#vrAddrLabel').html("Mesaj doğrulanamadı!");
 			clone.appendTo($('#vrAlert'));
           }
         });
@@ -370,11 +370,11 @@ $(document).ready(function() {
                       passphrase: signencryptPassphrase.val()
                   }, function(err) {
                       if (!err) {
-                          console.log("Loaded private key with passphrase");
+                          console.log("Gizli anahtar parola ile yüklendi.");
                       }
                       else{
 						clone = $('#vrError').clone();
-						clone.find('#vrAddrLabel').html("Signing error: Incorrect password for private key.");
+						clone.find('#vrAddrLabel').html("İmzalama hatası: geçersiz gizli anahtar parolası.");
 						clone.appendTo($('#vrAlert3'));
                       }
                   });
@@ -400,18 +400,18 @@ $(document).ready(function() {
 					    if(currUser===null){
 							linkText(document.getElementById('signencrypt-text'), document.getElementById('download-signencrypt-text'), 'encrypt');
 							clone = $('#vrWarning').clone();
-							clone.find('#vrAddrLabel').html("Message successfully encrypted, but not signed. Private key not loaded.");
+							clone.find('#vrAddrLabel').html("Mesaj şifrelendi fakat imzalanmadı. Gizli anahtar yüklenmedi.");
 						}else{
 							linkText(document.getElementById('signencrypt-text'), document.getElementById('download-signencrypt-text'), 'sign+encrypt');
 							clone = $('#vrSuccess').clone();
-							clone.find('#vrAddrLabel').html("Message successfully encrypted and signed.");
+							clone.find('#vrAddrLabel').html("Mesaj şifrelendi ve imzalandı.");
 						}
 						clone.appendTo($('#vrAlert3'));
                   });
               } else {
 					console.log("Error!");
 					clone = $('#vrError').clone();
-					clone.find('#vrAddrLabel').html("Encryption error. Incorrect public key.");
+					clone.find('#vrAddrLabel').html("Şifreleme hatası. Geçersiz açık anahtar.");
 					clone.appendTo($('#vrAlert3'));
 			  }
           });
@@ -445,7 +445,7 @@ $(document).ready(function() {
                 passphrase: decryptionPassphrase.val()
               }, function(err) {
                 if (!err) {
-                  console.log("Loaded private key with passphrase");
+                  console.log("Gizli anahtar parola ile yüklendi.");
 
                   // add KeyRing
                   var ring = new kbpgp.keyring.KeyRing;
@@ -457,13 +457,13 @@ $(document).ready(function() {
 						function(err, senderPUB)
 						{
 							if (!err) {
-								console.log("Sender's public key is loaded");
+								console.log("Gönderenin açık anahtarı yüklendi.");
 								ring.add_key_manager(senderPUB);
 								
 								kbpgp.unbox({keyfetch: ring, armored: decryptionEncryptedText.val()}, function(err, literals)
 								{
 									if (err != null) {
-										clone.find('#vrAddrLabel').html("Message failed to verify! <br>"+ err);
+										clone.find('#vrAddrLabel').html("Mesaj doğrulanamadı! <br>"+ err);
 										clone.appendTo($('#vrAlert2'));
 										console.log(err);
 									} else
@@ -477,19 +477,19 @@ $(document).ready(function() {
 										ds = literals[0].get_data_signer();
 										if (ds) { km = ds.get_key_manager(); }
 										if (km) {
-											console.log("Signed by PGP fingerprint");
+											console.log("PGP parmak izi ile imzalandı");
 											var pub_f = senderPUB.get_pgp_fingerprint().toString('hex');
 											var text_f = km.get_pgp_fingerprint().toString('hex');
-											console.log(text_f, (pub_f===text_f) ? 'and verified.' : 'and failed to verify.');
+											console.log(text_f, (pub_f===text_f) ? 've doğrulandır.' : 've doğrulanamadı.');
 
 											//-> switch alert message
 											if(pub_f === text_f){
 												clone = $('#vrSuccess').clone();
-												clone.find('#vrAddrLabel').html("Message is decrypted by priv, and signature is verified successfully by pub - with fingerprint "+pub_f);
+												clone.find('#vrAddrLabel').html("Mesaj özel anahtar ile de-şifrelendi ve imza da açık anahtar ile doğrulandı. Parmak izi; "+pub_f);
 											}
 											else{
 												clone = $('#vrWarning').clone();
-												clone.find('#vrAddrLabel').html("Incorrect fingerprint "+pub_f);
+												clone.find('#vrAddrLabel').html("Yanlış parmak izi "+pub_f);
 											}
 											
 											linkText(
@@ -505,7 +505,7 @@ $(document).ready(function() {
 						
 										}else{
 											clone = $('#vrWarning').clone();
-											clone.find('#vrAddrLabel').html('Decrypted, but incorrect fingerprint - signature not verified.<br>If this message encrypted without signature - ignore this message.');
+											clone.find('#vrAddrLabel').html('De-şifrelendi fakat yanlış parmak izi, imza doğrulanamadı.<br> Eğer bu mesaj imzasız şifrelendiyse bu mesajı görmezden gelin.');
 											
 											linkText(
 												document.getElementById('decryption-decrypted-text'),
@@ -569,7 +569,7 @@ $(document).ready(function() {
 										
 										
 										//just display an error, without any message...
-										clone.find('#vrAddrLabel').html("this... Message failed to verify! <br>"+ err);
+										clone.find('#vrAddrLabel').html("bu... Mesaj doğrulanamadı! <br>"+ err);
 										clone.appendTo($('#vrAlert2'));
 										console.log(err);
 									} else
@@ -595,11 +595,11 @@ $(document).ready(function() {
 											//-> switch alert message
 											if(pub_f === text_f){
 												clone = $('#vrSuccess').clone();
-												clone.find('#vrAddrLabel').html("Message is decrypted by priv, and signature is verified successfully by pub - with fingerprint "+pub_f);
+												clone.find('#vrAddrLabel').html("Mesaj gizli anahtar ile de-şifrelendi, imza açık anahtar ile doğrulandı. Parmak izi: "+pub_f);
 											}
 											else{
 												clone = $('#vrWarning').clone();
-												clone.find('#vrAddrLabel').html("Incorrect fingerprint "+pub_f);
+												clone.find('#vrAddrLabel').html("Geçersiz parmak izi "+pub_f);
 											}
 											
 											linkText(
@@ -615,7 +615,7 @@ $(document).ready(function() {
 						
 										}else{
 											clone = $('#vrWarning').clone();
-											clone.find('#vrAddrLabel').html('Decrypted, but incorrect fingerprint - signature not verified.<br>If this message encrypted without signature - ignore this message.');
+											clone.find('#vrAddrLabel').html('De-şifrelendi fakat geçersiz parmak izi, imza doğrulanamadı.<br> Eğer bu mesaj imzasız şifrelendiyse bu mesajı görmezden gelin.');
 											
 											linkText(
 												document.getElementById('decryption-decrypted-text'),
@@ -637,18 +637,18 @@ $(document).ready(function() {
                 } else {
                   console.log("Error in decryption unlock pgp");
 				  clone = $('#vrWarning').clone();
-				  clone.find('#vrAddrLabel').html('Incorrect password for private key');
+				  clone.find('#vrAddrLabel').html('Gizli anahtar parolası geçersiz.');
 				  clone.appendTo($('#vrAlert2'));
                 }
               });
             } else {
               console.log("Loaded private key w/o passphrase");
-			  clone.find('#vrAddrLabel').html("Invalid private key or password.");
+			  clone.find('#vrAddrLabel').html("Geçersiz gizli anahtar veya parola.");
 			  clone.appendTo($('#vrAlert2'));
             }
           } else {
             console.log("Error in decryption import");
-			clone.find('#vrAddrLabel').html("Error in decryption import");
+			clone.find('#vrAddrLabel').html("De-şifreleme hatası");
 			clone.appendTo($('#vrAlert2'));
           }
 
