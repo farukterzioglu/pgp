@@ -1,3 +1,6 @@
+**PGP İle Şifreleme Uygulamaları**  
+https://medium.com/@farukterzioglu/pgp-i%CC%87le-%C5%9Fifreleme-uygulamalar%C4%B1-2e9cff300ebc
+
 # PGP Suite
 
 A simple and easy to use PGP system
